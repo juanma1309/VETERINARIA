@@ -1,28 +1,17 @@
 const Connection = require('tedious').Connection;
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-const {
-    DATABASE_SERVER,
-    DATABASE_AUTH_TYPE,
-    DATABASE_USERNAME,
-    DATABASE_PASSWORD,
-    DATABASE_NAME,
-} = process.env;
 
 const configConnection = {
-    server: DATABASE_SERVER,
+    server: "seminario-server.database.windows.net",
     authentication: {
-        type: DATABASE_AUTH_TYPE,
+        type: "default",
         options: {
-            userName: DATABASE_USERNAME,
-            password: DATABASE_PASSWORD,
+            userName: "administrador",
+            password: "Seminario2023@",
         },
     },
     options: {
         encrypt: true,
-        database: DATABASE_NAME,
+        database: "SEMINARIO_VET",
         rowCollectionOnDone: true,
     },
 };
