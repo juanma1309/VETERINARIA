@@ -1,0 +1,16 @@
+{"mssql": {
+    "server": "seminario-server.database.windows.net",
+    "authentication": {
+        "type": "default",
+        "options": {
+            "userName": "administrador",
+            "password": "Seminario2023@"
+        }
+    },
+    "options": {
+        "encrypt": true,
+        "database": "SEMINARIO_VET",
+        "rowCollectionOnDone": true
+    }
+}
+}

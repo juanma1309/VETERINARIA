@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const conexion = require('./database/db');
+const getConnection = require('./database/db');
+
+let get_request = new sql.Request(getConnection);
 
 router.get('/', (req, res)=>{
-    conexion.query('select * from [dbo].[usuarios]', (error, results) => {
+    get_request.query('select * from [dbo].[usuarios]', (error, results) => {
         if(error){
             throw error
         }else{

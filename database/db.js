@@ -1,37 +1,12 @@
-const Connection = require('tedious').Connection;
+const path = require('path');
+const express = require('express');
+const router = require('express').Router();
+const sql = require('mssql');
+const sql_config = require(path.join("./config.json")).mssql;
 
-const configConnection = {
-    server: "seminario-server.database.windows.net",
-    authentication: {
-        type: "default",
-        options: {
-            userName: "administrador",
-            password: "Seminario2023@",
-        },
-    },
-    options: {
-        encrypt: true,
-        database: "SEMINARIO_VET",
-        rowCollectionOnDone: true,
-    },
-};
 
-const getConnection = () => {
-    const connect = () => new Promise((resolve, reject) => {
-        const connectionInstance = new Connection(configConnection);
-        connectionInstance.on('connect', (error) => {
-            if(!error) {
-                resolve(connectionInstance);
-            }
-            else {
-                reject(error);
-            }
-        });
+const pool = new sql.ConnectionPool(sql_config);
 
-        connectionInstance.connect();
-    });
+pool.connect(err => { if (err) throw err });
 
-    return {connect};
-};
-
-module.exports = getConnection;
+module.express = pool
