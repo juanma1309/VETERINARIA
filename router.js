@@ -4,17 +4,22 @@ const router = express.Router();
 const getConnection = require('./database/db');
 
 
+// router.get('/', (req, res)=>{
+    
+    
+//     getConnection.query('select * from citas3', (error, results) => {
+//         if(error){
+//             throw error
+//         }else{
+//             res.render('index.ejs',{results:results});
+//         }
+//     })
+// });
+
 router.get('/', (req, res)=>{
-    
-    
-    getConnection.query('select * from citas3', (error, results) => {
-        if(error){
-            throw error
-        }else{
-            res.render('index.ejs',{results:results});
-        }
-    })
+    res.render('index.ejs');
 });
+
 
 router.get('/create', (req, res)=>{
     res.render('create');
@@ -24,6 +29,7 @@ const crud = require('./controllers/crud');
 const conexion = require('./database/db');
 router.post('/save', crud.save);
 router.post('/update', crud.update);
+router.post('/login', crud.login);
 
 
 //RUTA PARA EDITAR REGISTROS
@@ -39,6 +45,16 @@ router.get('/edit/:id',(req,res)=>{
     });
 });
 
-
+//RUTA PARA ELIMINAR REGISTROS
+router.get('/delete/:id',(req,res)=>{
+    const id = req.params.id;
+    conexion.query('DELETE FROM citas3 WHERE id = ?',[id], (error, results)=>{
+        if(error){
+            throw error
+        }else{
+            res.redirect('/');
+        }
+    });
+});
 
 module.exports = router

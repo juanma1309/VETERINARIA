@@ -34,3 +34,17 @@ exports.update = (req,res) =>{
         }
     })
 }
+
+exports.login = (req,res) =>{
+    const ret = [];
+    const email = req.body.email;
+    const password = req.body.password;
+    // console.log(mail +'-' + password);
+    conexion.query('SELECT mail, password, count(*) from login WHERE mail = ?  && password = ?', [email, password], (error,results)=>{
+        if(error){
+            console.log(error);
+        }else {
+            ret = JSON.stringify(results);
+        }
+    })
+}
