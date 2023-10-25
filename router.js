@@ -3,17 +3,22 @@ const router = express.Router();
 
 const getConnection = require('./database/db');
 
-let get_request = new sql.Request(getConnection);
 
 router.get('/', (req, res)=>{
-    get_request.query('select * from [dbo].[usuarios]', (error, results) => {
+    
+    
+    getConnection.query('select * from usuario', (error, results) => {
         if(error){
             throw error
         }else{
-            res.send(results)
+            res.render('index.ejs',{results:results});
         }
     })
 });
+
+router.get('/create', (req, res)=>{
+    res.render('create');
+}) ;
 
 
 module.exports = router

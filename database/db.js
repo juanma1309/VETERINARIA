@@ -1,12 +1,18 @@
-const path = require('path');
-const express = require('express');
-const router = require('express').Router();
-const sql = require('mssql');
-const sql_config = require(path.join("./config.json")).mssql;
+const mysql = require('mysql');
 
+const conexion = mysql. createConnection({
+host: "seminariovet.mysql.database.azure.com",
+user: "administrador",
+password: "Seminario2023@",
+database: "seminariovet",
+});
 
-const pool = new sql.ConnectionPool(sql_config);
+conexion. connect((error)=>{
+    if(error){
+    console.error('El error de conexión es: '+ error);
+    return
+    }
+    console. log(' ¡Conectado a la BD MySQLI');
+});
 
-pool.connect(err => { if (err) throw err });
-
-module.express = pool
+module.exports = conexion;

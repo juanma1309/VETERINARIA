@@ -5,6 +5,6 @@ app.set('view engine', 'ejs');
 
 app.use('/', require('./router'));
 
-app.listen(5001,()=>{
-    console.log('server corriendo en http://localhost:5001')
+app.listen(5002,()=>{
+    console.log('server corriendo en http://localhost:5002')
 })
