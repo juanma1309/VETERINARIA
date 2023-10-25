@@ -11,7 +11,7 @@
 
 </head>
 <body class="bg-pink">
-    <h2 class="text-center my-5 titulo"><a href="/create"><i class='bx bxs-plus-circle'></i></a>Administrador de Pacientes de Veterinaria<a href="/usuario"><i class='bx bxs-user-plus'></i></a><a href="/"><i class='bx bxs-log-out-circle' ></i></a></h2>
+    <h2 class="text-center my-5 titulo"></a>Administrador de Pacientes de Veterinaria <a href="/"><i class='bx bxs-log-out-circle' ></i></a></h2>
     <div class="container mt-5 p-5">
         <div id="contenido" class="row">
             <div class="col-md-6 agregar-cita">
@@ -23,9 +23,6 @@
                     <div id="id" class="cita p-2">
                         <h2 class="card-title font-weight-bolder"> <%= user.mascota %></h2>
                         <p>
-                            <span class="font-weight-bolder">Correo: <%= user.correo %> </span>
-                        </p>
-                        <p>
                             <span class="font-weight-bolder">Propietario: <%= user.propietario %> </span>
                         </p>
                         <p>
@@ -36,10 +33,6 @@
                         </p>
                         <p>
                             <span class="font-weight-bolder">Síntomas: <%= user.sintomas %></span>
-                        </p>
-                        <p>
-                            <a href="/edit/<%= user.id %>"><i class='bx bxs-edit'></i></a>
-                            <a href="/delete/<%= user.id %>"><i class='bx bxs-message-minus'></i></a>
                         </p>
                         <p>
                             <span class="font-weight-bolder">__________________________________</span>

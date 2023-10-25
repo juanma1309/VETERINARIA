@@ -19,13 +19,29 @@ router.get('/index', (req, res)=>{
     })
 });
 
+// router.get('/citas', (req, res)=>{
+
+//     getConnection.query('select * from citas3', (error, results) => {
+//         if(error){
+//             throw error
+//         }else{
+//             res.render('citas.ejs',{results:results});
+//         }
+//     })
+// });
+
 router.get('/create', (req, res)=>{
     res.render('create');
+}) ;
+
+router.get('/usuario', (req, res)=>{
+    res.render('usuario');
 }) ;
 
 const crud = require('./controllers/crud');
 const conexion = require('./database/db');
 router.post('/save', crud.save);
+router.post('/saveUsuario', crud.saveUsuario);
 router.post('/update', crud.update);
 
 //RUTA PARA EDITAR REGISTROS
@@ -54,23 +70,46 @@ router.get('/delete/:id',(req,res)=>{
 });
 
 
-router.post('/auth',(req, res)=> {
-	const user = req.body.user;
-	const pass = req.body.pass;    
-	if (user && pass) {
-		conexion.query('SELECT count(*) FROM login WHERE mail = ? && password = ?', [user , pass], (error, results)=> {
-			if( error) {    
-				throw error
-			} else {       
-                if(Object.values(results[0])[0] == 0){
-                    console.log('denegado')
-                }else{
-                    res.redirect('/index');
+router.post('/auth', (req, res) => {
+    const user = req.body.user;
+    const pass = req.body.pass;
+    const rol = 'admin';
+    if (user && pass) {
+        conexion.query('SELECT count(*) FROM login WHERE correo = ? && password = ?', [user, pass], (error, results) => {
+            if (error) {
+                throw error;
+            } else {
+                const userCount = Object.values(results[0])[0];
+
+                if (userCount === 0) {
+                    console.log('Access denied');
+                } else {
+                    conexion.query('SELECT count(*) FROM login WHERE correo = ? && password = ? && rol = ?', [user, pass, rol], (error, results) => {
+                        if (error) {
+                            throw error;
+                        } else {
+                            const adminCount = Object.values(results[0])[0];
+
+                            if (adminCount === 0) {
+
+                                getConnection.query('select * from citas3 where correo = ?',[user], (error, results) => {
+                                    if(error){
+                                        throw error
+                                    }else{
+                                        res.render('citas.ejs',{results:results});
+                                        // console.log(user)
+                                    }
+                                })
+                            } else {
+                                // console.log('Bienvenido admin');
+                                res.redirect('/index'); 
+                            }
+                        }
+                    });
                 }
-                
-			}			
-		})
-	}
+            }
+        });
+    }
 });
 
 module.exports = router
