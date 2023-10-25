@@ -11,22 +11,43 @@
 
 </head>
 <body class="bg-pink">
-    <h2 class="text-center my-5 titulo">BIENVENIDO</h2>
+    <h2 class="text-center my-5 titulo"><a href="/create"><i class='bx bxs-plus-circle'></i></a>Administrador de Pacientes de Veterinaria<a href="/create"><i class='bx bxs-user-plus'></i></a></h2>
     <div class="container mt-5 p-5">
         <div id="contenido" class="row">
             <div class="col-md-6 agregar-cita">
 
-                <form form action="/login" method="POST">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="text" class="form-control" id="email" name="email">
+            <div class="col-md-6">
+                <h2 id="administra" class="mb-4 text-center">Administra tus Citas</h2>
+                <ul id="citas" class="list-group lista-citas">
+                    <% results.forEach((user)=> { %>
+                    <div id="id" class="cita p-2">
+                        <h2 class="card-title font-weight-bolder"> <%= user.mascota %></h2>
+                        <p>
+                            <span class="font-weight-bolder">Propietario: <%= user.propietario %> </span>
+                        </p>
+                        <p>
+                            <span class="font-weight-bolder">Teléfono: <%= user.telefono%></span>
+                        </p>
+                        <p>
+                            <span class="font-weight-bolder">Fecha: <%= user.fecha %></span>
+                        </p>
+                        <p>
+                            <span class="font-weight-bolder">Síntomas: <%= user.sintomas %></span>
+                        </p>
+                        <p>
+                            <a href="/edit/<%= user.id %>"><i class='bx bxs-edit'></i></a>
+                            <a href="/delete/<%= user.id %>"><i class='bx bxs-message-minus'></i></a>
+                        </p>
+                        <p>
+                            <span class="font-weight-bolder">__________________________________</span>
+                        </p>
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
+                    <% }) %>
+
+                </ul>
+            </div>
+
+
         </div> <!--.row-->
     </div><!--.container-->
 
