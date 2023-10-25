@@ -82,7 +82,8 @@ router.post('/auth', (req, res) => {
                 const userCount = Object.values(results[0])[0];
 
                 if (userCount === 0) {
-                    console.log('Access denied');
+                    // console.log('Access denied');
+                    res.redirect('/'); 
                 } else {
                     conexion.query('SELECT count(*) FROM login WHERE correo = ? && password = ? && rol = ?', [user, pass, rol], (error, results) => {
                         if (error) {
