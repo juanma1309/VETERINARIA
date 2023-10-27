@@ -92,7 +92,7 @@ router.post('/auth', (req, res) => {
                             const adminCount = Object.values(results[0])[0];
 
                             if (adminCount === 0) {
-
+                                //prubea
                                 getConnection.query('select * from citas3 where correo = ?',[user], (error, results) => {
                                     if(error){
                                         throw error
