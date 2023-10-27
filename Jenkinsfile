@@ -16,15 +16,6 @@ pipeline {
                 }
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Compilación de base de datos exitosa.'
-        }
-        failure {
-            echo 'Compilación de base de datos fallida.'
-        }
 
      stage('Build') {
          steps {
