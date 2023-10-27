@@ -7,33 +7,7 @@ pipeline {
             }
         }
 
-        stage('Configurar Base de Datos') {
-            steps {
-                script {
-                    sh 'npm install mysql'  // Instala el módulo MySQL para Node.js (asegúrate de que npm esté configurado correctamente)
-                    
-                    // Configura la conexión a la base de datos
-                    const mysql = require('mysql');
-                    const conexion = mysql.createConnection({
-                        host: "seminariovet.mysql.database.azure.com",
-                        user: "administrador",
-                        password: "Seminario2023@",
-                        database: "seminariovet",
-                    });
 
-                    conexion.connect((error) => {
-                        if (error) {
-                            console.error('El error de conexión es: ' + error);
-                            return;
-                        }
-                        console.log('¡Conectado a la BD MySQLI');
-                    });
-
-                    // Exporta la conexión para que esté disponible en tus pruebas
-                    module.exports = conexion;
-                }
-            }
-        }
 
         stage('UNIT Testing') {
             steps {
