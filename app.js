@@ -9,7 +9,7 @@ app.use(express.json());
 // app.set('port',process.env.PORT || 5005);
 app.use('/', require('./router'));
 
-app.listen(5004,()=>{
+app.listen(process.env.PORT ||5004,()=>{
     console.log('server corriendo en http://localhost:5004')
 })
 
