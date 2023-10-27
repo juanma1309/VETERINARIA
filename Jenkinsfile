@@ -4,7 +4,8 @@ pipeline {
     
 			stage('Git Checkout') {
 				steps {
-				git branch: 'main', url: 'https://github.com/BritoOs/ACS_Proyecto.git'
+				git branch: 'main', url: 'https://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@/github.com/juanma1309/VETERINARIA.git'
+
 				}
 			}
 		
