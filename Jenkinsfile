@@ -19,5 +19,14 @@ pipeline {
          }
      }
 
+     stage('Deploy') {
+         parallel {
+             stage('Inicio de implementacin') {
+                 steps {
+                     echo "Iniciar el despliegue.."
+                 }             
+             }
+         }
+    }
     }
 }
