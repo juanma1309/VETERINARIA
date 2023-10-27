@@ -12,7 +12,7 @@ pipeline {
                 script {
                     // Ejecutar pruebas de integración en la base de datos compilada
                     sh 'npm install'  // Instala las dependencias de las pruebas
-                    sh 'node integration-tests.js'  // Ejecuta las pruebas de integración
+                    sh 'node tus-pruebas.js'  // Ejecuta las pruebas de integración
                 }
             }
         }
