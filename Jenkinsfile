@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Ejecuta las pruebas unitarias
                     sh 'npm install'  // Instala las dependencias de tus pruebas
-                    sh 'npx mocha tus-pruebas.js'  // Ejecuta las pruebas con Mocha
+                    sh 'npx mocha crud.js'  // Ejecuta las pruebas con Mocha
 
                     // Comprueba el resultado de las pruebas
                     if (currentBuild.resultIsBetterOrEqualTo('SUCCESS')) {
