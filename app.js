@@ -3,6 +3,8 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.static(__dirname + '/css/styles.css'));
+
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
