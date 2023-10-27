@@ -9,7 +9,7 @@ pipeline {
         
         stage("Compilar") {
             steps {
-                sh "./database/db.js"
+                sh "./db.js"
             }
         }
 
