@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+// const app = require('./app');
 
 const getConnection = require('./database/db');
+
+// app.listen(app.get('port'));
 
 
 router.get('/', (req, res)=>{
