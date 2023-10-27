@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 const getConnection = require('./database/db');
 
-// app.listen(app.get('port'));
+// app.listen(app.get('port'))asdsd;
 
 
 router.get('/', (req, res)=>{
