@@ -1,41 +1,53 @@
 pipeline {
     agent any
     stages {
-        stage('Git Checkout') {
-            steps {
-                git branch: 'main', url: 'https://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@github.com/juanma1309/VETERINARIA.git'
-            }
-        }
-
         stage('Configurar Base de Datos') {
             steps {
                 script {
-                    // Configuración de la base de datos (por ejemplo, creación de base de datos, tablas, usuarios)
-                    sh 'mysql -u root -e "CREATE DATABASE mydb;"'
-                    sh 'mysql -u root -e "GRANT ALL PRIVILEGES ON mydb.* TO \'myuser\'@\'localhost\';"'
+                    sh 'npm install mysql'  // Instala el módulo MySQL para Node.js (asegúrate de que npm esté configurado correctamente)
+                    
+                    // Configura la conexión a la base de datos
+                    const mysql = require('mysql');
+                    const conexion = mysql.createConnection({
+                        host: "seminariovet.mysql.database.azure.com",
+                        user: "administrador",
+                        password: "Seminario2023@",
+                        database: "seminariovet",
+                    });
 
-                    // Iniciar la base de datos
-                    sh 'service mysql start'
+                    conexion.connect((error) => {
+                        if (error) {
+                            console.error('El error de conexión es: ' + error);
+                            return;
+                        }
+                        console.log('¡Conectado a la BD MySQLI');
+                    });
 
-                    // Esperar a que la base de datos esté disponible
-                    sh 'while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done'
+                    // Exporta la conexión para que esté disponible en tus pruebas
+                    module.exports = conexion;
                 }
             }
         }
 
-        stage('UNIT Testing') {
+        stage('Ejecutar Pruebas de Base de Datos') {
             steps {
-                sh 'mvn test'
+                script {
+                    // Importa la conexión a la base de datos
+                    const conexion = require('./conexion.js');  // Ajusta la ruta al archivo de conexión si es necesario
+
+                    // Ahora puedes utilizar 'conexion' para realizar pruebas en la base de datos
+                    // Ejecuta tus pruebas aquí
+                }
             }
         }
 
-        // Otras etapas de tu pipeline
-
-        stage('Detener Base de Datos') {
+        stage('Limpiar y Cerrar Conexión a la Base de Datos') {
             steps {
                 script {
-                    // Detener la base de datos después de su uso
-                    sh 'service mysql stop'
+                    const conexion = require('./conexion.js');  // Ajusta la ruta al archivo de conexión si es necesario
+
+                    // Realiza cualquier limpieza necesaria o cierre de la conexión
+                    conexion.end();
                 }
             }
         }
