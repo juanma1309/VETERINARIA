@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+// const app = require('./app');
 
 const getConnection = require('./database/db');
+
+// app.listen(app.get('port'))asdsd;asdsad
 
 
 router.get('/', (req, res)=>{
@@ -18,17 +21,6 @@ router.get('/index', (req, res)=>{
         }
     })
 });
-
-// router.get('/citas', (req, res)=>{
-
-//     getConnection.query('select * from citas3', (error, results) => {
-//         if(error){
-//             throw error
-//         }else{
-//             res.render('citas.ejs',{results:results});
-//         }
-//     })
-// });
 
 router.get('/create', (req, res)=>{
     res.render('create');
