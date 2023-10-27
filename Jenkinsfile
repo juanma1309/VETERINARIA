@@ -19,19 +19,19 @@ pipeline {
         stage('Ejecutar Pruebas Unitarias') {
             steps {
                 script {
+                    // Instala las dependencias necesarias (Node.js y npm)
+                    sh 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
+                    sh 'apt-get install -y nodejs'
+        
+                    // Instala las dependencias de pruebas
+                    sh 'npm install mocha chai sinon --save-dev'
+        
                     // Ejecuta las pruebas unitarias
-                    sh 'npm install'  // Instala las dependencias de tus pruebas
-                    sh 'npx mocha crud.js'  // Ejecuta las pruebas con Mocha
-
-                    // Comprueba el resultado de las pruebas
-                    if (currentBuild.resultIsBetterOrEqualTo('SUCCESS')) {
-                        currentBuild.result = 'SUCCESS'
-                    } else {
-                        currentBuild.result = 'FAILURE'
-                    }
+                    sh 'npx mocha tus-pruebas.js'  // Reemplaza con la ruta correcta a tus pruebas
                 }
             }
         }
+
         
 
     }
