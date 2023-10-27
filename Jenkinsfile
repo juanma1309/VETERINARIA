@@ -7,15 +7,21 @@ pipeline {
             }
         }
 
-        stage('Ejecutar Pruebas de Integración') {
-            steps {
-                script {
-                    // Ejecutar pruebas de integración en la base de datos compilada
-                    sh 'npm install'  // Instala las dependencias de las pruebas
-                    sh 'node tus-pruebas.js'  // Ejecuta las pruebas de integración
-                }
+    stage('Ejecutar Pruebas de Integración') {
+        steps {
+            script {
+                // Instala las dependencias necesarias
+                sh 'npm install'
+    
+                // Ejecuta las pruebas de integración
+                sh 'node tus-pruebas.js'
+    
+                // Asegúrate de que el estado de salida sea exitoso (0) para que Jenkins lo reconozca
+                currentBuild.resultIsBetterOrEqualTo('SUCCESS')
             }
         }
+    }
+
 
      stage('Build') {
          steps {
