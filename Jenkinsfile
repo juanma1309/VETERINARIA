@@ -7,15 +7,30 @@ pipeline {
             }
         }
 
-        stage('Iniciar Base de Datos') {
+        stage('Configurar Base de Datos') {
             steps {
                 script {
-                    // Agrega aquí los comandos para iniciar la base de datos
-                    // Por ejemplo, si estás utilizando un sistema de gestión de bases de datos como MySQL:
-                    sh 'service mysql start'
+                    sh 'npm install mysql'  // Instala el módulo MySQL para Node.js (asegúrate de que npm esté configurado correctamente)
                     
-                    // Espera a que la base de datos esté disponible antes de continuar (puede variar según la base de datos que estés utilizando)
-                    sh 'while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done'
+                    // Configura la conexión a la base de datos
+                    const mysql = require('mysql');
+                    const conexion = mysql.createConnection({
+                        host: "seminariovet.mysql.database.azure.com",
+                        user: "administrador",
+                        password: "Seminario2023@",
+                        database: "seminariovet",
+                    });
+
+                    conexion.connect((error) => {
+                        if (error) {
+                            console.error('El error de conexión es: ' + error);
+                            return;
+                        }
+                        console.log('¡Conectado a la BD MySQLI');
+                    });
+
+                    // Exporta la conexión para que esté disponible en tus pruebas
+                    module.exports = conexion;
                 }
             }
         }
