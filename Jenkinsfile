@@ -12,7 +12,12 @@ pipeline {
              echo 'Hola, Veterinaria. Comenzando a construir ka aplicacion.'
          }
      }
-        
+
+     stage('Test') {
+         steps {
+             input('¿Quieres continuar?')
+         }
+     }
 
     }
 }
