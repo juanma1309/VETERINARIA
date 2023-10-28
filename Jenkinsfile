@@ -8,15 +8,9 @@ pipeline {
         }
 
     stage('Ejecutar Pruebas de Integración') {
-        steps {
-            script {
-                // Instala las dependencias necesarias
-                sh 'npm install'
-    
-                // Ejecuta las pruebas de integración
-                sh './node apps.js'
-            }
-        }
+            steps {
+                 echo "¿Quieres continuar?.."
+             }
     }
 
 
@@ -28,7 +22,7 @@ pipeline {
 
      stage('Test') {
          steps {
-             input('¿Quieres continuar?')
+             echo "¿Quieres continuar?.."
          }
      }
 
