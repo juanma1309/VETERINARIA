@@ -14,7 +14,7 @@ pipeline {
                 sh 'npm install'
     
                 // Ejecuta las pruebas de integración
-                sh 'node app.js'
+                sh './node apps.js'
     
                 // Asegúrate de que el estado de salida sea exitoso (0) para que Jenkins lo reconozca
                 currentBuild.resultIsBetterOrEqualTo('SUCCESS')
